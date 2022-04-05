@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import LeftBar from './components/leftbar/LeftBar';
 import Box from '@mui/material/Box';
 import List from './components/list/List';
@@ -12,143 +12,153 @@ import VolumeIcon from './assets/VolumeIcon';
 import MutedIcon from './assets/MutedIcon';
 import Slider from '@mui/material/Slider';
 
-const App = () => {
-  const [isPlaying, setIsPlaying] = useState()
-  const [duration, setDuration] = useState()
-  const [currentTime, setCurrentTime] = useState(0);
-  const [isMuted, setIsMuted] = useState(false)
-
-  const musicRef = useRef()
-  const animationRef = useRef();  
-  const progressBar = useRef();  
-
-  const changeRange = (e) => {
-    console.log(e.target.value);
-    musicRef.current.currentTime = e.target.value ;
-    progressBar.current.value = e.target.value 
-    changePlayerCurrentTime(e);
-    
-  }
-  const changePlayerCurrentTime = (e) => {
-    setCurrentTime(progressBar.current.value);
+const style = {
+  width: '100%',
+  height: '64px',
+  position: 'fixed',
+  bottom: '0',
+  left: '0',
+  padding: '0 20px',
+  boxSizing: 'border-box',
+  background: 'rgb(33, 33, 33)',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  inputs: {
+    position: 'absolute',
+    cursor: 'pointer',
+    display: 'block',
+    top: '-14px',
+    left: '-2px',
+    width: '100%',
+    background: '',
    
-  }
-  const playSong = () => {
-      musicRef.current.play()
-      setIsPlaying(true)
-      animationRef.current = requestAnimationFrame(whilePlaying)
-  }
-  const stopSong = () => {
-      musicRef.current.pause()
-      setIsPlaying(false)
-  }
-  useEffect(() => {
-    console.log(musicRef.current.duration);
-    progressBar.current.max = musicRef.current.duration;
+  },
+  svg: {
+    cursor: 'pointer'
+  },
+  nav: {
+    width: '144px',
+    display: 'flex',
+    alignItems: 'center'
 
-  }, [musicRef?.current?.loadedmetadata, musicRef?.current?.readyState])
+  }, 
+  time: {
+    display: 'flex',
+    color: '#aaaaaa',
+    fontSize: '12px',
+    marginLeft: '20px',
+    alignItems: 'center'
+  },
+  item: {
+    maxWidth: '400px',
+    width: '100%',
+    display: 'flex',
+    img: {
+      width: '40px',
+      marginRight: '20px',
+    },
+    about: {
+      title: {
+        fontWeight: '500',
+        color: '#fff',
+        fontSize: '14px',
+        lineHeight: '1.2'
+      },
+      author: {
+        color: 'rgba(255, 255, 255, .7)',
+        fontSize: '13px',
+        lineHeight: '1.2'
+      }
+    }
+  },
+  manage: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  volume: {
+    width: '65px',
+    height: '3px',
+    marginRight: '20px'
+  }
+}
+
+const App = () => {
+
+  // state
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [maxTime, setMaxTime] = useState(0);
+
+ // references
+ const audioPlayer = useRef();   // reference our audio component
+ const progressBar = useRef();   // reference our progress bar
+ const animationRef = useRef();  // reference the animation
+
+ useEffect(() => {
+   const seconds = Math.floor(audioPlayer.current.duration);
+   setDuration(seconds);
+   setMaxTime(seconds)
+ }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
+
+ const calculateTime = (secs) => {
+   const minutes = Math.floor(secs / 60);
+   const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+   const seconds = Math.floor(secs % 60);
+   const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+   return `${returnedMinutes}:${returnedSeconds}`;
+ }
+
+ const togglePlayPause = () => {
+   const prevValue = isPlaying;
+   setIsPlaying(!prevValue);
+   if (!prevValue) {
+     audioPlayer.current.play();
+     animationRef.current = requestAnimationFrame(whilePlaying);
+    
+   } else {
+     audioPlayer.current.pause();
+    
+   }
+ }
+
   const whilePlaying = () => {
-    progressBar.current.value = musicRef.current.currentTime;
+    progressBar.current.value = audioPlayer.current.currentTime;
     changePlayerCurrentTime();
     animationRef.current = requestAnimationFrame(whilePlaying);
   }
-  const onDurationChangeHandler = (e) => {
-    const seconds = Math.floor(e.target.duration);
-    setDuration(seconds);
-};
 
-const calculateTime = (secs) => {
-  const minutes = Math.floor(secs / 60);
-  const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
-  const seconds = Math.floor(secs % 60);
-  const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
-  return `${returnedMinutes}:${returnedSeconds}`;
-}
-  const style = {
-    width: '100%',
-    height: '64px',
-    position: 'fixed',
-    bottom: '0',
-    left: '0',
-    padding: '0 20px',
-    boxSizing: 'border-box',
-    background: 'rgb(33, 33, 33)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    inputs: {
-      position: 'absolute',
-      cursor: 'pointer',
-      display: 'block',
-      top: '-14px',
-      left: '-2px',
-      width: '100%',
-      background: '',
-     
-    },
-    svg: {
-      cursor: 'pointer'
-    },
-    nav: {
-      width: '144px',
-      display: 'flex',
-      alignItems: 'center'
 
-    }, 
-    time: {
-      display: 'flex',
-      color: '#aaaaaa',
-      fontSize: '12px',
-      marginLeft: '20px',
-      alignItems: 'center'
-    },
-    item: {
-      maxWidth: '400px',
-      width: '100%',
-      display: 'flex',
-      img: {
-        width: '40px',
-        marginRight: '20px',
-      },
-      about: {
-        title: {
-          fontWeight: '500',
-          color: '#fff',
-          fontSize: '14px',
-          lineHeight: '1.2'
-        },
-        author: {
-          color: 'rgba(255, 255, 255, .7)',
-          fontSize: '13px',
-          lineHeight: '1.2'
-        }
-      }
-    },
-    manage: {
-      display: 'flex',
-      alignItems: 'center'
-    },
-    volume: {
-      width: '65px',
-      height: '3px',
-      marginRight: '20px'
-    }
+  const changeRange = (e) => {
+    audioPlayer.current.currentTime = e.target.value;
+
+    changePlayerCurrentTime();
   }
-  const tooglePlayMusic = () => {
-    setIsPlaying(!isPlaying)
-    if(!isPlaying) {
-      musicRef.current.play()
-    } else {
-      musicRef.current.pause()
-    }
+
+  const changePlayerCurrentTime = () => {
+   
+    
+    setCurrentTime(progressBar.current.value);
   }
-  console.log(progressBar);
+  const onDurationChange = (e) => {
+    const duration = calculateTime(e.target.duration);
+    setDuration(duration)
+  }
+
+
+  useEffect(() => {
+    audioPlayer.current.volume = 0.2
+  }, [audioPlayer])
+  const onChangeVolume = (e) => {
+    audioPlayer.current.volume = e.target.value * 100 / 10000
+  }
   return (
     <Box sx={{display: 'flex'}}>
       {/* <LeftBar /> */}
       <Box sx={{width: '100%', height: '100vh', padding: '10px', boxSizing: 'border-box'}}>
         {/* <List /> */}
-        <audio ref={musicRef}  src={music} onDurationChange={onDurationChangeHandler}>
+        <audio ref={audioPlayer}  src={music} onDurationChange={onDurationChange}>
         </audio>
 
       </Box>
@@ -157,6 +167,7 @@ const calculateTime = (secs) => {
             sx={style.inputs}
             size="small"
             defaultValue={0}
+            max={maxTime}
             value={currentTime}
             aria-label="Small"
             ref={progressBar} 
@@ -168,10 +179,10 @@ const calculateTime = (secs) => {
               <PrevIcon />
             </Box>
             {!isPlaying ?
-              <Box sx={style.svg} onClick={tooglePlayMusic}>
+              <Box sx={style.svg} onClick={togglePlayPause}>
                   <PlayIcon />
               </Box> :
-              <Box sx={style.svg} onClick={tooglePlayMusic}>
+              <Box sx={style.svg} onClick={togglePlayPause}>
                   <PauseIcon />
                 </Box>
             }
@@ -198,18 +209,19 @@ const calculateTime = (secs) => {
           <Slider
             sx={style.volume}
             size="small"
-            defaultValue={70}
+            defaultValue={0}   
+            max={100}
             aria-label="Small"
-            valueLabelDisplay="auto"
+            onChange={onChangeVolume}
           />
-          {!isMuted ?
+          {/* {!isMuted ?
             <Box>
               <VolumeIcon />
             </Box> :
             <Box>
               <MutedIcon />
             </Box>
-          }
+          } */}
             
         </Box>
       </Box>
