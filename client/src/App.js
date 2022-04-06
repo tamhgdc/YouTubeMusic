@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import LeftBar from './components/leftbar/LeftBar';
 import Box from '@mui/material/Box';
 import List from './components/list/List';
-import music from './assets/music.mp3'
+import music from './assets/music1.mp3'
 import PlayIcon from './assets/PlayIcon';
 import PauseIcon from './assets/PauseIcon';
 import NextIcon from './assets/NextIcon';
@@ -90,6 +90,9 @@ const App = () => {
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [maxTime, setMaxTime] = useState(0);
+  const [isMuted, setisMuted] = useState(false)
+  const [volume, setVolume] = useState(50)
+  const [isHoverVolume, setIsHoverVolume] = useState(false)
 
  // references
  const audioPlayer = useRef();   // reference our audio component
@@ -115,7 +118,9 @@ const App = () => {
    setIsPlaying(!prevValue);
    if (!prevValue) {
      audioPlayer.current.play();
-     animationRef.current = requestAnimationFrame(whilePlaying);
+     setInterval(() => {
+      whilePlaying()
+     }, 50);
     
    } else {
      audioPlayer.current.pause();
@@ -126,7 +131,7 @@ const App = () => {
   const whilePlaying = () => {
     progressBar.current.value = audioPlayer.current.currentTime;
     changePlayerCurrentTime();
-    animationRef.current = requestAnimationFrame(whilePlaying);
+    
   }
 
 
@@ -148,11 +153,27 @@ const App = () => {
 
 
   useEffect(() => {
-    audioPlayer.current.volume = 0.2
-  }, [audioPlayer])
+    audioPlayer.current.volume = 0.5
+  }, [])
+  useEffect(() => {
+    const res = volume * 100 / 10000
+    audioPlayer.current.volume = res;
+  }, [volume])
   const onChangeVolume = (e) => {
-    audioPlayer.current.volume = e.target.value * 100 / 10000
+    setisMuted(false)
+    setVolume(e.target.value)
+    
   }
+
+  const toggleMuted = () => {
+    setisMuted(!isMuted);
+    if (!isMuted) {
+      setVolume(0)
+    } else {
+      setVolume(50)
+    }
+  }
+  console.log(volume);
   return (
     <Box sx={{display: 'flex'}}>
       {/* <LeftBar /> */}
@@ -162,7 +183,7 @@ const App = () => {
         </audio>
 
       </Box>
-      <Box sx={style}>
+      <Box sx={style} onMouseLeave={() => setIsHoverVolume(false)}>
         <Slider
             sx={style.inputs}
             size="small"
@@ -206,22 +227,32 @@ const App = () => {
           </Box>
         </Box>
         <Box sx={style.manage}>
-          <Slider
-            sx={style.volume}
-            size="small"
-            defaultValue={0}   
-            max={100}
-            aria-label="Small"
-            onChange={onChangeVolume}
-          />
-          {/* {!isMuted ?
-            <Box>
+          {isHoverVolume && 
+            <Slider
+                sx={style.volume}
+                size="small"
+                defaultValue={0}
+                value={volume}   
+                max={100}
+                aria-label="Small"
+                onChange={onChangeVolume}
+              />
+          }
+          {!isMuted ?
+            <Box
+              onClick={toggleMuted}
+              onMouseEnter={() => setIsHoverVolume(true)}
+            >
               <VolumeIcon />
             </Box> :
-            <Box>
-              <MutedIcon />
-            </Box>
-          } */}
+            <>
+              <Box
+                onClick={toggleMuted}
+              >
+                <MutedIcon />
+              </Box>
+            </>
+          }
             
         </Box>
       </Box>
