@@ -4,6 +4,7 @@ import LeftBar from './components/leftbar/LeftBar';
 import Box from '@mui/material/Box';
 import List from './components/list/List';
 import music from './assets/music1.mp3'
+import music1 from './assets/music.mp3'
 import PlayIcon from './assets/PlayIcon';
 import PauseIcon from './assets/PauseIcon';
 import NextIcon from './assets/NextIcon';
@@ -32,7 +33,10 @@ const style = {
     left: '-2px',
     width: '100%',
     background: '',
-   
+    color: '#ff0100',
+    "& * ": {
+      transition: 'all .1s ease'
+    },
   },
   svg: {
     cursor: 'pointer'
@@ -83,6 +87,17 @@ const style = {
   }
 }
 
+const list = [
+  {
+    song: music,
+  },
+  {
+    song: music1,
+  },
+
+
+]
+
 const App = () => {
 
   // state
@@ -93,7 +108,8 @@ const App = () => {
   const [isMuted, setisMuted] = useState(false)
   const [volume, setVolume] = useState(50)
   const [isHoverVolume, setIsHoverVolume] = useState(false)
-
+  const [songs, setSongs] = useState(list)
+  const [current, setCurrent] = useState(0)
  // references
  const audioPlayer = useRef();   // reference our audio component
  const progressBar = useRef();   // reference our progress bar
@@ -103,6 +119,10 @@ const App = () => {
    const seconds = Math.floor(audioPlayer.current.duration);
    setDuration(seconds);
    setMaxTime(seconds)
+   setInterval(() => {
+    whilePlaying()
+   }, 50);
+   console.log('<=============');
  }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
 
  const calculateTime = (secs) => {
@@ -118,13 +138,10 @@ const App = () => {
    setIsPlaying(!prevValue);
    if (!prevValue) {
      audioPlayer.current.play();
-     setInterval(() => {
-      whilePlaying()
-     }, 50);
+
     
    } else {
      audioPlayer.current.pause();
-    
    }
  }
 
@@ -136,17 +153,18 @@ const App = () => {
 
 
   const changeRange = (e) => {
+    setCurrentTime(e.target.value)
+    console.log(e.target.value, '<====');
     audioPlayer.current.currentTime = e.target.value;
 
     changePlayerCurrentTime();
   }
 
-  const changePlayerCurrentTime = () => {
-   
-    
+  const changePlayerCurrentTime = () => {    
     setCurrentTime(progressBar.current.value);
   }
   const onDurationChange = (e) => {
+   
     const duration = calculateTime(e.target.duration);
     setDuration(duration)
   }
@@ -154,6 +172,7 @@ const App = () => {
 
   useEffect(() => {
     audioPlayer.current.volume = 0.5
+
   }, [])
   useEffect(() => {
     const res = volume * 100 / 10000
@@ -173,14 +192,21 @@ const App = () => {
       setVolume(50)
     }
   }
-  console.log(volume);
+  const changeSong = () => {
+    if(current === 1) {
+      setCurrent(0)
+      
+    } else {
+      audioPlayer.current.autoplay = true;
+      setCurrent(current + 1)
+    }
+  }
   return (
     <Box sx={{display: 'flex'}}>
       {/* <LeftBar /> */}
       <Box sx={{width: '100%', height: '100vh', padding: '10px', boxSizing: 'border-box'}}>
         {/* <List /> */}
-        <audio ref={audioPlayer}  src={music} onDurationChange={onDurationChange}>
-        </audio>
+        <audio ref={audioPlayer} autoplay={true}  src={songs[current].song} onDurationChange={onDurationChange} />
 
       </Box>
       <Box sx={style} onMouseLeave={() => setIsHoverVolume(false)}>
@@ -193,10 +219,11 @@ const App = () => {
             aria-label="Small"
             ref={progressBar} 
             onChange={changeRange}
+            
           />
         {/* <input style={style.inputs} type="range" className='progressBar'  defaultValue="0" ref={progressBar} onChange={changeRange} /> */}
         <Box sx={style.nav}>
-            <Box sx={style.svg}>
+            <Box sx={style.svg} onClick={changeSong}>
               <PrevIcon />
             </Box>
             {!isPlaying ?
@@ -207,7 +234,7 @@ const App = () => {
                   <PauseIcon />
                 </Box>
             }
-            <Box sx={style.svg}>
+            <Box sx={style.svg} onClick={changeSong}>
               <NextIcon />
             </Box>
             <Box sx={style.time}>
