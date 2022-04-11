@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
+import { useCallback, useState } from 'react';
 
-export const useTooglePlay = (audioRef) => {
-    const [isPlaying, setIsPlaying] = useState(false);
-    const tooglePlay = () => {
-        setIsPlaying(!isPlaying)
-        if(!isPlaying) {
-            audioRef.current.play();
-        } else {
-            audioRef.current.pause();
-        }
+const useTooglePlay = (audioRef) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const tooglePlay = useCallback(() => {
+    setIsPlaying(!isPlaying);
+    if (!isPlaying) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
     }
-    return { tooglePlay, isPlaying };
-}
+  }, [isPlaying, audioRef]);
+  return { tooglePlay, isPlaying };
+};
+export default useTooglePlay;

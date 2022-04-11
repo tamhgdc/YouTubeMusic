@@ -4,6 +4,7 @@ body {
     margin: 0;
     --primary: #f40082;
     --secondary: #ffd200;
+    background: #030303;
 
 }
 * {
