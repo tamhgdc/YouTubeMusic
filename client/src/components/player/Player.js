@@ -5,6 +5,7 @@ import useSetDuration from './logic/useSetDuration';
 import usePresentTime from './logic/usePresentTime';
 import useHover from '../../utils/hooks/useHover';
 import useVolume from './logic/useVolume';
+import { useSelector } from 'react-redux';
 
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
@@ -14,8 +15,9 @@ import PlayerDesc from './PlayerDesc';
 import PlayerSett from './PlayerSett';
 import useReplay from './logic/useReplay';
 
-import second from '../../assets/music1.mp3';
+import second from '../../assets/music2.mp4';
 import { style } from './style/style';
+
 
 const Player = () => {
   const audioRef = useRef();
@@ -27,10 +29,11 @@ const Player = () => {
   const { isHover, setIsHover } = useHover();
   const { volume, isMuted, toogleMuted, setCurrentVolume } = useVolume(audioRef);
   const { isReplay, toogleIsReplay } = useReplay(presentTime, duration, progressRef, audioRef);
+  const { activeSong } = useSelector(state => state.initial)
 
   return (
     <>
-      <audio ref={audioRef} src={second} onLoadedMetadata={setDurationValue} />
+      <audio ref={audioRef} src={activeSong.src} onLoadedMetadata={setDurationValue} />
       <Box sx={style}>
         <Slider
           ref={progressRef}

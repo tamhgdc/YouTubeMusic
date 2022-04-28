@@ -1,4 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import src1 from '../../assets/music2.mp4'
+import src2 from '../../assets/music1.mp3'
+import src3 from '../../assets/music.mp3'
 
 const initialState = {
   data: [
@@ -8,6 +11,7 @@ const initialState = {
       author: 'Владимир Высоцкий',
       album: 'Новый звук',
       time: '2:08',
+      src: `${src1}`,
     },
     {
       img: 'https://lh3.googleusercontent.com/2ovx4TdBFiaceH6MJpNXDaJZM_GlN9bcRF7Z1Zz5r53hQac7OY8xBtEJuZ8k82yNT1jb7GSHWl4i3XAl=w60-h60-l90-rj',
@@ -15,6 +19,7 @@ const initialState = {
       author: 'Владимир Высоцкий',
       album: 'Шуточные и сатирические песн...',
       time: '4:42',
+      src: `${src2}`,
     },
     {
       img: 'https://lh3.googleusercontent.com/u_sf0iYxpEMZiuI3b_rknEAERnAbEF20ez8EZVPgXPqQ0US0Uvb2SEs-9Sx3jOhA1woo_KKC8S3US4BaVw=w60-h60-l90-rj',
@@ -22,8 +27,11 @@ const initialState = {
       author: 'Владимир Высоцкий',
       album: 'Песни для театра и кино',
       time: '2:57',
+      src: `${src3}`,
     },
   ],
+  activeSong: {},
+
 };
 
 export const initialSlice = createSlice({
@@ -36,9 +44,12 @@ export const initialSlice = createSlice({
     setEditorState: (state, action) => {
       state.editorState = action.payload;
     },
+    setActiveSong: (state, action) => {
+      state.activeSong = action.payload;
+    }
   },
 });
 
-export const { setData, setEditorState } = initialSlice.actions;
+export const { setData, setEditorState, setActiveSong } = initialSlice.actions;
 
 export default initialSlice.reducer;
