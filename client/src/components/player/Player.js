@@ -30,7 +30,7 @@ const Player = () => {
   const { volume, isMuted, toogleMuted, setCurrentVolume } = useVolume(audioRef);
   const { isReplay, toogleIsReplay } = useReplay(presentTime, duration, progressRef, audioRef);
   const { activeSong } = useSelector((state) => state.initial);
-  const { usePlayNext, usePlayPrev } = usePlay();
+  const { usePlayNext, usePlayPrev } = usePlay(presentTime, duration);
 
   return (
     <>
