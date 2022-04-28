@@ -10,9 +10,9 @@ import PrevIcon from '../../assets/PrevIcon';
 
 import { calculateTime } from '../../utils/calculateTime';
 
-const PlayerNav = ({ tooglePlay, isPlaying, presentTime, duration }) => (
+const PlayerNav = ({ tooglePlay, isPlaying, presentTime, duration, usePlayPrev, usePlayNext }) => (
   <Box sx={style.nav}>
-    <Box sx={style.svg}>
+    <Box sx={style.svg} onClick={usePlayPrev}>
       <PrevIcon />
     </Box>
 
@@ -26,7 +26,7 @@ const PlayerNav = ({ tooglePlay, isPlaying, presentTime, duration }) => (
       </Box>
     )}
 
-    <Box sx={style.svg}>
+    <Box sx={style.svg} onClick={usePlayNext}>
       <NextIcon />
     </Box>
     <Box sx={style.time}>
@@ -38,8 +38,10 @@ const PlayerNav = ({ tooglePlay, isPlaying, presentTime, duration }) => (
 export default memo(PlayerNav);
 
 PlayerNav.propTypes = {
-  tooglePlay: PropTypes.func,
-  isPlaying: PropTypes.bool,
-  presentTime: PropTypes.number,
-  duration: PropTypes.number,
+  tooglePlay: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  presentTime: PropTypes.number.isRequired,
+  duration: PropTypes.number.isRequired,
+  usePlayPrev: PropTypes.func.isRequired,
+  usePlayNext: PropTypes.func.isRequired,
 };

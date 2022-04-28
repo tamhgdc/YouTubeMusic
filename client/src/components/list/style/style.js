@@ -32,7 +32,7 @@ const style = {
       display: 'flex',
       alignItems: 'center',
       fontSize: '14px',
-      pozition: 'relative'
+      pozition: 'relative',
     },
     text: {
       color: 'rgba(255, 255, 255, .7)',
@@ -52,8 +52,7 @@ const style = {
       zindex: '10',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center'
-      
+      justifyContent: 'center',
     },
     img: {
       width: '32px',

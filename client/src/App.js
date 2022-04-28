@@ -7,9 +7,8 @@ import Player from './components/player/Player';
 import Header from './components/header/Header';
 import List from './components/list/List';
 
-
 function App() {
-  const { isActive } = useIsActiveSong()
+  const { isActive } = useIsActiveSong();
   return (
     <Box>
       <Header />

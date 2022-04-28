@@ -17,6 +17,7 @@ import useReplay from './logic/useReplay';
 
 import second from '../../assets/music2.mp4';
 import { style } from './style/style';
+import usePlay from './logic/usePlay';
 
 const Player = () => {
   const audioRef = useRef();
@@ -29,6 +30,7 @@ const Player = () => {
   const { volume, isMuted, toogleMuted, setCurrentVolume } = useVolume(audioRef);
   const { isReplay, toogleIsReplay } = useReplay(presentTime, duration, progressRef, audioRef);
   const { activeSong } = useSelector((state) => state.initial);
+  const { usePlayNext, usePlayPrev } = usePlay();
 
   return (
     <>
@@ -43,8 +45,8 @@ const Player = () => {
           size="small"
           aria-label="Small"
         />
-        <PlayerNav tooglePlay={tooglePlay} isPlaying={isPlaying} presentTime={presentTime} duration={duration} />
-        <PlayerDesc img={activeSong.img} name={activeSong.name} author={activeSong.author}/>
+        <PlayerNav tooglePlay={tooglePlay} isPlaying={isPlaying} presentTime={presentTime} duration={duration} usePlayPrev={usePlayPrev} usePlayNext={usePlayNext} />
+        <PlayerDesc img={activeSong.img} name={activeSong.name} author={activeSong.author} />
         <PlayerSett
           isHover={isHover}
           setIsHover={setIsHover}

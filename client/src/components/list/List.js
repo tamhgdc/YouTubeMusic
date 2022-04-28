@@ -11,7 +11,7 @@ import useActiveSong from './logic/useActiveSong';
 
 const List = () => {
   const { data } = useSelector((state) => state.initial);
-  const { addSong } = useActiveSong()
+  const { addSong } = useActiveSong();
   return (
     <Container>
       <Box sx={style}>

@@ -6,7 +6,7 @@ const useTooglePlay = (audioRef) => {
   const { activeSong, isPlaying } = useSelector((state) => state.initial);
   const dispatch = useDispatch();
   const tooglePlay = useCallback(() => {
-    dispatch(setIsPlaying())
+    dispatch(setIsPlaying());
     if (isPlaying) {
       audioRef.current.play();
     } else {

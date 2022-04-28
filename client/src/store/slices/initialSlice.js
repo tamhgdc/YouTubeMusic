@@ -35,7 +35,6 @@ const initialState = {
   ],
   activeSong: {},
   isPlaying: false,
-
 };
 
 export const initialSlice = createSlice({
@@ -53,7 +52,7 @@ export const initialSlice = createSlice({
       state.isPlaying = true;
     },
     setIsPlaying: (state) => {
-      if(state.isPlaying) {
+      if (state.isPlaying) {
         state.isPlaying = false;
       } else {
         state.isPlaying = true;
