@@ -7,18 +7,17 @@ import { Container } from '@mui/material';
 import style from './style/style';
 import ListItem from './ListItem';
 
-import { setActiveSong } from '../../store/slices/initialSlice';
 import useActiveSong from './logic/useActiveSong';
 
 const List = () => {
-  const dispatch = useDispatch();
-  const { data, activeSong } = useSelector((state) => state.initial);
+  const { data } = useSelector((state) => state.initial);
   const { addSong } = useActiveSong()
   return (
     <Container>
       <Box sx={style}>
         {data.map((item) => (
           <ListItem
+            id={item.id}
             img={item.img}
             name={item.name}
             author={item.author}
