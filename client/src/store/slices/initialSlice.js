@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import src1 from '../../assets/music2.mp4'
-import src2 from '../../assets/music1.mp3'
-import src3 from '../../assets/music.mp3'
+import src1 from '../../assets/music2.mp4';
+import src2 from '../../assets/music1.mp3';
+import src3 from '../../assets/music.mp3';
 
 const initialState = {
   data: [
@@ -31,6 +31,7 @@ const initialState = {
     },
   ],
   activeSong: {},
+  isPlaying: false,
 
 };
 
@@ -46,10 +47,15 @@ export const initialSlice = createSlice({
     },
     setActiveSong: (state, action) => {
       state.activeSong = action.payload;
+      state.isPlaying = true;
+    },
+    setIsPlaying: (state) => {
+      const isPlaying = state.isPlaying
+      state.isPlaying = !isPlaying;
     }
   },
 });
 
-export const { setData, setEditorState, setActiveSong } = initialSlice.actions;
+export const { setData, setEditorState, setActiveSong, setIsPlaying } = initialSlice.actions;
 
 export default initialSlice.reducer;

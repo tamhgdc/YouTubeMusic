@@ -44,6 +44,7 @@ export const style = {
     display: 'flex',
     img: {
       width: '40px',
+      height: '40px',
       marginRight: '20px',
     },
     about: {

@@ -1,25 +1,25 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsPlaying } from '../../../store/slices/initialSlice';
 
 const useTooglePlay = (audioRef) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const { activeSong } = useSelector(state => state.initial)
+  const { activeSong, isPlaying } = useSelector((state) => state.initial);
+  const dispatch = useDispatch();
   const tooglePlay = useCallback(() => {
-    setIsPlaying(!isPlaying);
-    if (!isPlaying) {
+    dispatch(setIsPlaying())
+    if (isPlaying) {
       audioRef.current.play();
     } else {
       audioRef.current.pause();
     }
-  }, [isPlaying, audioRef]);
+  }, [isPlaying, audioRef, dispatch]);
   useEffect(() => {
-    
-    if (!isPlaying) {
+    if (isPlaying) {
       audioRef.current.play();
     } else {
       audioRef.current.pause();
     }
-  }, [activeSong, isPlaying, audioRef])
+  }, [activeSong, isPlaying, audioRef]);
   return { tooglePlay, isPlaying };
 };
 export default useTooglePlay;
