@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveSong } from "../../../store/slices/initialSlice";
+import { setActiveSong, setIsPlaying } from "../../../store/slices/initialSlice";
 
 const useActiveSong = (id) => {
     const dispatch = useDispatch()
@@ -19,7 +19,6 @@ const useActiveSong = (id) => {
         }
     }, [id, activeSong])
 
-    
 
     return { addSong , isCompare}
 }

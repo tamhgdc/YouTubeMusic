@@ -12,7 +12,7 @@ const initialState = {
       author: 'Владимир Высоцкий',
       album: 'Новый звук',
       time: '2:08',
-      src: `${src1}`,
+      src: `${src3}`,
     },
     {
       id: '2',
@@ -30,7 +30,7 @@ const initialState = {
       author: 'Владимир Высоцкий',
       album: 'Песни для театра и кино',
       time: '2:57',
-      src: `${src3}`,
+      src: `${src1}`,
     },
   ],
   activeSong: {},
@@ -53,9 +53,12 @@ export const initialSlice = createSlice({
       state.isPlaying = true;
     },
     setIsPlaying: (state) => {
-      const isPlaying = state.isPlaying
-      state.isPlaying = !isPlaying;
-    }
+      if(state.isPlaying) {
+        state.isPlaying = false;
+      } else {
+        state.isPlaying = true;
+      }
+    },
   },
 });
 

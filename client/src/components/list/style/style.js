@@ -9,6 +9,23 @@ const style = {
     alignItems: 'center',
     justifyContent: 'space-between',
     cursor: 'pointer',
+    padding: '0px 8px 0px 8px',
+    active: {
+      height: '49px',
+      width: '100%',
+      borderBottom: '1px solid #1D1D1D',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      cursor: 'pointer',
+      background: 'rgb(29, 29, 29)',
+      padding: '0px 8px 0px 8px',
+      img: {
+        width: '32px',
+        borderRadius: '3px',
+        marginRight: '30px',
+      },
+    },
     wr: {
       maxWidth: '350px',
       width: '100%',

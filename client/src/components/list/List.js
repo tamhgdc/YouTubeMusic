@@ -17,6 +17,7 @@ const List = () => {
       <Box sx={style}>
         {data.map((item) => (
           <ListItem
+            key={item.id}
             id={item.id}
             img={item.img}
             name={item.name}

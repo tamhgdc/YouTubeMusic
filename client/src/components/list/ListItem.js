@@ -6,16 +6,18 @@ import { Box } from '@mui/material';
 import style from './style/style';
 import useActiveSong from './logic/useActiveSong';
 import PlayIcon from '../../assets/PlayIcon';
+import SecondPlayIcon from '../../assets/SecondPlayIcon';
 
 const ListItem = ({ img, name, author, album, time, onClick, item, id }) => {
 
   const { isCompare } = useActiveSong(id)
   const [hover, setHover] = useState(false)
-
+  
   return (
-    <Box sx={style.item} onClick={() => onClick(item)}>
+    <Box sx={ isCompare ?   style.item.active  : style.item} onClick={() => onClick(item)} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
       <Box sx={style.item.wr}>
-       {isCompare && <Box sx={style.item.shadow}> <PlayIcon /> </Box>}
+       {hover && <Box sx={style.item.shadow}> <PlayIcon /> </Box>}
+       {!hover && isCompare && <Box sx={style.item.shadow}> <SecondPlayIcon /> </Box>}
         <img src={img} />
         {name}
       </Box>
