@@ -41,7 +41,7 @@ PlayerNav.propTypes = {
   tooglePlay: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   presentTime: PropTypes.number.isRequired,
-  duration: PropTypes.number.isRequired,
+  duration: PropTypes.number,
   usePlayPrev: PropTypes.func.isRequired,
   usePlayNext: PropTypes.func.isRequired,
 };
