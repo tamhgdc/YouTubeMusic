@@ -4,8 +4,8 @@ import { Box } from '@mui/system';
 
 import style from './style/style';
 
-const MainTitle = () => {
-  return <Box sx={style.title}>Для спокойного утра</Box>;
+const MainTitle = ({ title }) => {
+  return <Box sx={style.title}>{title}</Box>;
 };
 
 export default MainTitle;

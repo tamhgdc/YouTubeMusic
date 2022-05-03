@@ -64,9 +64,13 @@ const MainHeader = () => {
       />
       <Container>
         <Box sx={style.header.wr}>
-          <MainTitle />
+          <MainTitle title={'Для спокойного утра'} />
           <Box sx={style.item.wr}>
-            {position > 0 && <Box sx={style.slider.circleL} onClick={slidePrev}><ArrowIconLeft /></Box>}
+            {position > 0 && (
+              <Box sx={style.slider.circleL} onClick={slidePrev}>
+                <ArrowIconLeft />
+              </Box>
+            )}
             <Box
               sx={{ transform: `translate3d(-${position}px, 0px, 0px)`, display: 'flex', transition: 'all .5s ease' }}>
               {data.map((item) => (

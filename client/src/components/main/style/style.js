@@ -3,14 +3,14 @@ const style = {
     padding: '16vh 0 24px',
     background: 'linear-gradient(to bottom,rgba(0,0,0,0.6), #030303)',
     color: '#fff',
-    height: '600px',
+    height: '500px',
     overflow: 'hidden',
     boxSizing: 'border-box',
     image: {
       position: 'absolute',
       top: 0,
       zIndex: '-1',
-      height: '500px',
+      height: '400px',
       width: '100%',
       backgroundSize: 'cover',
       background: 'no-repeat center center fixed',
@@ -24,7 +24,7 @@ const style = {
     fontWeight: '700',
     fontSize: '28px',
     lineHeight: '1.2',
-    padding: '32px 0px 16px 0px',
+    padding: '12px 0px 16px 0px',
   },
   item: {
     position: 'relative',
@@ -39,8 +39,8 @@ const style = {
     wr: {
       display: 'flex',
       width: '100%',
-      height: '500px',
-      overflow: 'scroll',
+      height: '250px',
+      overflow: 'hidden',
     },
     img: {
       width: '180px',
