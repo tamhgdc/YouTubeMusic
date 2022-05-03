@@ -10,6 +10,7 @@ export const style = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
+  zIndex: '999',
   inputs: {
     position: 'absolute',
     cursor: 'pointer',

@@ -37,6 +37,9 @@ const Header = () => {
           Главная
         </Link>
         <Box sx={path == '/nav' ? style.nav.item.active : style.nav.item}>Навигатор</Box>
+        <Link to={'/library'} style={path == '/library' ? style.nav.item.active : style.nav.item}>
+          Библиотека
+        </Link>
         <Box sx={path == '/search' ? style.nav.item.active : style.nav.item} onClick={changeIsOpen}>
           Поиск
         </Box>

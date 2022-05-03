@@ -5,6 +5,14 @@ const style = {
     borderRadius: '4px',
     border: '1px solid rgba(255,255,255,0.1)',
     padding: '15px 10px',
+    footer: {
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'flex-end',
+    },
+    wr: {
+      marginBottom: '15px',
+    },
     input: {
       width: '100%',
       background: 'rgb(33, 33, 33)',

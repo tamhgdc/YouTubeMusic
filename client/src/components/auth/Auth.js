@@ -30,7 +30,7 @@ const Auth = ({ id, open, anchorEl, onClose }) => {
             placeholder="Email"
             type="email"
           />
-          <Box sx={{ marginBottom: '15px' }} />
+          <Box sx={style.main.wr} />
           <Input
             sx={style.main.input}
             hiddenLabel
@@ -40,8 +40,8 @@ const Auth = ({ id, open, anchorEl, onClose }) => {
             placeholder="Пароль"
             type="password"
           />
-          <Box sx={{ marginBottom: '15px' }} />
-          <Box sx={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
+          <Box sx={style.main.wr} />
+          <Box sx={style.main.footer}>
             <Button sx={style.button}>Войти</Button>
           </Box>
         </Box>

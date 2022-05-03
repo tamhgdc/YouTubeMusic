@@ -4,10 +4,14 @@ import { Box } from '@mui/system';
 
 import style from './style/style';
 
-const MainItem = ({ img, name, author }) => {
+import { Link } from 'react-router-dom';
+
+const MainItem = ({ id, img, name, author }) => {
   return (
     <Box sx={style.item}>
-      <img src={img} />
+      <Link to={`/album:${id}`}>
+        <img src={img} />
+      </Link>
       <Box
         sx={{
           position: 'absolute',
