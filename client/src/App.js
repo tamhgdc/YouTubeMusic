@@ -14,7 +14,7 @@ function App() {
     <Box>
       <Header />
       {/* <List /> */}
-      <Box sx={{ marginTop: '100px' }}>
+      <Box >
         <AppRouter />
       </Box>
       {isActive && <Player />}

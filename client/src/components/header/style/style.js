@@ -6,11 +6,12 @@ const style = {
   padding: '0 16px',
   alignItems: 'center',
   justifyContent: 'space-between',
-  background: '#030303',
+  // background: '#030303',
   //   borderBottom: '1px solid #1D1D1D',
   position: 'fixed',
   top: '0',
   left: '0',
+  zIndex: '999',
   nav: {
     position: 'relative',
     width: '900px',

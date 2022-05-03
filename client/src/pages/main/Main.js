@@ -1,10 +1,16 @@
-import React from 'react'
-import List from '../../components/list/List'
+import React from 'react';
+
+import { Box } from '@mui/system';
+import MainHeader from '../../components/main/MainHeader';
+import MainBody from '../../components/main/MainBody';
 
 const Main = () => {
   return (
-   <List />
-  )
-}
+    <Box sx={{ color: '#fff'}}>
+      <MainHeader />
+      <MainBody />
+    </Box>
+  );
+};
 
-export default Main
+export default Main;
