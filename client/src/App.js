@@ -5,14 +5,18 @@ import Box from '@mui/material/Box';
 
 import Player from './components/player/Player';
 import Header from './components/header/Header';
-import List from './components/list/List';
+
+import AppRouter from './components/router/AppRouter';
 
 function App() {
   const { isActive } = useIsActiveSong();
   return (
     <Box>
       <Header />
-      <List />
+      {/* <List /> */}
+      <Box sx={{ marginTop: '100px' }}>
+        <AppRouter />
+      </Box>
       {isActive && <Player />}
     </Box>
   );

@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 
 import { style } from './style/style';
 
-const PlayerDesc = ({ img, name, author, usePlayPrev }) => {
+const PlayerDesc = ({ img, name, author, }) => {
   return (
     <Box sx={style.item}>
       <img src={img} alt={name} />

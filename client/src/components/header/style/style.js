@@ -12,10 +12,15 @@ const style = {
   top: '0',
   left: '0',
   nav: {
+    position: 'relative',
+    width: '900px',
     color: 'rgba(255,255,255,0.5)',
     display: 'flex',
+    justifyContent: 'center',
     fontSize: '20px',
     item: {
+      color: 'rgba(255,255,255,0.5)',
+      textDecoration: 'none',
       marginRight: '22px',
       cursor: 'pointer',
     },

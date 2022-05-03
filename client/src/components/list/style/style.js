@@ -1,6 +1,5 @@
 const style = {
   color: '#fff',
-  marginTop: '100px',
   item: {
     height: '49px',
     width: '100%',

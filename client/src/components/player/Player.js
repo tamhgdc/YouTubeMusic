@@ -6,6 +6,8 @@ import usePresentTime from './logic/usePresentTime';
 import useHover from '../../utils/hooks/useHover';
 import useVolume from './logic/useVolume';
 import { useSelector } from 'react-redux';
+import usePlay from './logic/usePlay';
+import useReplay from './logic/useReplay';
 
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
@@ -13,11 +15,8 @@ import Slider from '@mui/material/Slider';
 import PlayerNav from './PlayerNav';
 import PlayerDesc from './PlayerDesc';
 import PlayerSett from './PlayerSett';
-import useReplay from './logic/useReplay';
 
-import second from '../../assets/music2.mp4';
 import { style } from './style/style';
-import usePlay from './logic/usePlay';
 
 const Player = () => {
   const audioRef = useRef();
@@ -45,7 +44,14 @@ const Player = () => {
           size="small"
           aria-label="Small"
         />
-        <PlayerNav tooglePlay={tooglePlay} isPlaying={isPlaying} presentTime={presentTime} duration={duration} usePlayPrev={usePlayPrev} usePlayNext={usePlayNext} />
+        <PlayerNav
+          tooglePlay={tooglePlay}
+          isPlaying={isPlaying}
+          presentTime={presentTime}
+          duration={duration}
+          usePlayPrev={usePlayPrev}
+          usePlayNext={usePlayNext}
+        />
         <PlayerDesc img={activeSong.img} name={activeSong.name} author={activeSong.author} />
         <PlayerSett
           isHover={isHover}

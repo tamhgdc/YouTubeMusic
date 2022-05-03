@@ -35,6 +35,8 @@ const initialState = {
   ],
   activeSong: {},
   isPlaying: false,
+  isSearch: false,
+  textInSearch: '',
 };
 
 export const initialSlice = createSlice({
@@ -58,9 +60,16 @@ export const initialSlice = createSlice({
         state.isPlaying = true;
       }
     },
+    setIsSearch: (state) => {
+      const isSearch = state.isSearch;
+      state.isSearch = !isSearch;
+    },
+    setTextInSearch: (state, action) => {
+      state.textInSearch = action.payload;
+    }
   },
 });
 
-export const { setData, setEditorState, setActiveSong, setIsPlaying } = initialSlice.actions;
+export const { setData, setEditorState, setActiveSong, setIsPlaying, setIsSearch, setTextInSearch } = initialSlice.actions;
 
 export default initialSlice.reducer;
