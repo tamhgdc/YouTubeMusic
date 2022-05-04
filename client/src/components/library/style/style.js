@@ -9,10 +9,21 @@ const style = {
     chip: {
       margin: '15px 0',
       item: {
+        position: 'relative',
         background: 'rgba(255,255,255,0.1)',
         border: '1px solid rgba(255,255,255,0.1)',
         color: '#fff',
         cursor: 'pointer',
+        list: {
+          top: '170px',
+          position: 'absolute',
+          background: 'rgb(33, 33, 33)',
+          width: '150px',
+          color: '#fff',
+          span: {
+            fontSize: '14px',
+          },
+        },
       },
     },
     item: {
