@@ -2,7 +2,6 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { Box, Container } from '@mui/material';
-import Chip from '@mui/material/Chip';
 
 import style from './style/style';
 import LibraryHeaderItem from './LibraryHeaderItem';

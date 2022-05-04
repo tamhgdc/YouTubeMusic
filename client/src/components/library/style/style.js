@@ -48,5 +48,32 @@ const style = {
       },
     },
   },
+  modal: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    maxWidth: '560px',
+    width: '100%',
+    boxShadow: 24,
+    padding: '24px 24px',
+    background: 'rgb(33, 33, 33)',
+    border: '1px solid rgba(255,255,255,0.1)',
+    borderRadius: '2px',
+    zIndex: '999',
+    outline: 'none',
+    color: '#fff',
+    input: {
+      width: '100%',
+      background: 'rgb(33, 33, 33)',
+      borderBottom: '1px solid rgba(255,255,255,0.1)',
+      color: '#ffffff80',
+
+      '&::before': {
+        content: '""',
+        border: 'none !important',
+      },
+    },
+  },
 };
 export default style;
