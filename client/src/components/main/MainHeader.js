@@ -81,8 +81,8 @@ const MainHeader = () => {
             )}
             <Box
               sx={{ transform: `translate3d(-${position}px, 0px, 0px)`, display: 'flex', transition: 'all .5s ease' }}>
-              {data.map((item) => (
-                <MainItem id={item.id} img={item.img} name={item.name} author={item.author} />
+              {data.map((item, key) => (
+                <MainItem key={key} id={item.id} img={item.img} name={item.name} author={item.author} />
               ))}
             </Box>
             {position !== maxPosition - 975 && (

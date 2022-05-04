@@ -1,55 +1,33 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
+import useHeader from './logic/useHeader';
 import useFind from '../search/logic/useFind';
+
+import SearchInput from '../search/SearchInput';
+import Auth from '../auth/Auth';
 
 import Button from '@mui/material/Button';
 import { Box } from '@mui/material';
 
 import style from './style/style';
-import SearchInput from '../search/SearchInput';
-import { Link } from 'react-router-dom';
-import useHeader from './logic/useHeader';
-import Auth from '../auth/Auth';
+import HeaderItem from './HeaderItem';
+import HeaderButtons from './HeaderButtons';
 
 const Header = () => {
   const { isSearch, changeIsOpen } = useFind();
-  const { position, path } = useHeader();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  const { position, path, anchorEl, id, open, handleOpenPopover, handleClosePopover } = useHeader();
 
   return (
     <Box sx={position > 20 ? style.styleBackground : style}>
-      <Box>
-        <img src="//music.youtube.com/img/on_platform_logo_dark.svg" />
-      </Box>
+      <Box component={'img'} src="//music.youtube.com/img/on_platform_logo_dark.svg" />
       <Box sx={style.nav}>
         {isSearch && <SearchInput />}
-        <Link to="/" style={path == '/' ? style.nav.item.active : style.nav.item}>
-          Главная
-        </Link>
-        <Box sx={path == '/nav' ? style.nav.item.active : style.nav.item}>Навигатор</Box>
-        <Link to={'/library'} style={path == '/library' ? style.nav.item.active : style.nav.item}>
-          Библиотека
-        </Link>
-        <Box sx={path == '/search' ? style.nav.item.active : style.nav.item} onClick={changeIsOpen}>
-          Поиск
-        </Box>
+
+        <HeaderItem to={'/'} path={path} text={'Главная'} />
+        <HeaderItem to={'/nav'} path={path} text={'Навигаторе'} />
+        <HeaderItem to={'/library'} path={path} text={'Библиотека'} />
+        <HeaderItem notALink={true} to={'/search'} path={path} text={'Поиск'} onClick={changeIsOpen} />
       </Box>
-      <Box sx={{ position: 'relative' }}>
-        <Button sx={style.enter} aria-describedby={id} onClick={handleClick}>
-          ВОЙТИ
-        </Button>
-        <Auth id={id} open={open} anchorEl={anchorEl} onClose={handleClose} />
-      </Box>
+      <HeaderButtons id={id} onClick={handleOpenPopover} open={open} anchorEl={anchorEl} onClose={handleClosePopover} />
     </Box>
   );
 };

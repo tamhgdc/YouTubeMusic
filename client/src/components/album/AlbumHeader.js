@@ -1,12 +1,15 @@
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
+
 import { Button, Container } from '@mui/material';
 import { Box } from '@mui/system';
-import React from 'react';
+
 import AddPlayListIcon from '../../assets/AddPlayListIcon';
 import MixIcon from '../../assets/MixIcon';
 
 import style from './style/style';
 
-const AlbumHeader = () => {
+const AlbumHeader = ({ imgBackground, img, name, length, time }) => {
   return (
     <Box sx={style.header}>
       <img
@@ -26,12 +29,10 @@ const AlbumHeader = () => {
             <Box sx={style.about.length}> 100 треков • 5 часов 17 минут </Box>
             <Box>
               <Button sx={style.button} startIcon={<MixIcon />}>
-                {' '}
-                Перемишать{' '}
+                Перемишать
               </Button>
               <Button sx={style.buttonTwo} startIcon={<AddPlayListIcon />}>
-                {' '}
-                Добавить в Библиотеку{' '}
+                Добавить в Библиотеку
               </Button>
             </Box>
           </Box>
@@ -41,4 +42,12 @@ const AlbumHeader = () => {
   );
 };
 
-export default AlbumHeader;
+export default memo(AlbumHeader);
+
+// AlbumHeader.propTypes = {
+//   imgBackground: PropTypes.string.isRequired,
+//   img: PropTypes.string.isRequired,
+//   name: PropTypes.string.isRequired,
+//   length: PropTypes.string.isRequired,
+//   time: PropTypes.string.isRequired,
+// };
