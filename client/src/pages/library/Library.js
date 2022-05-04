@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import LibraryHeader from '../../components/library/LibraryHeader';
 
 const Library = () => {
   return (
-    <div>Library</div>
-  )
-}
+    <>
+      <LibraryHeader />
+    </>
+  );
+};
 
-export default Library
+export default Library;

@@ -6,9 +6,9 @@ import SearchItem from '../../components/search/SearchItem';
 
 const Search = () => {
   return (
-    <Container sx={{ width: '870px' }}>
+    <Container sx={{ width: '870px', marginTop: '100px' }}>
       <Box sx={{ fontSize: '20px', color: '#fff', fontWeight: 700, lineHeight: '1.2', margin: '16px 6px' }}>Треки</Box>
-      <SearchItem setup={true}/>
+      <SearchItem setup={true} />
       <SearchItem />
       <SearchItem />
     </Container>

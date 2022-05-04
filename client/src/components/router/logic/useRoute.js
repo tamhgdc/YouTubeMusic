@@ -11,7 +11,8 @@ const useRoute = () => {
     { path: '/', element: <Main /> },
     { path: '/search', element: <Search /> },
     { path: '/album:id', element: <Album /> },
-    { path: '/library', element: <Library /> },
+    { path: '/library/playlist', element: <Library /> },
+    { path: '/library/songs', element: <Library /> },
   ];
   return { unAuthRoutes };
 };

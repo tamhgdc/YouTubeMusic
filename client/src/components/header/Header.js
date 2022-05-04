@@ -3,14 +3,12 @@ import useHeader from './logic/useHeader';
 import useFind from '../search/logic/useFind';
 
 import SearchInput from '../search/SearchInput';
-import Auth from '../auth/Auth';
+import HeaderItem from './HeaderItem';
+import HeaderButtons from './HeaderButtons';
 
-import Button from '@mui/material/Button';
 import { Box } from '@mui/material';
 
 import style from './style/style';
-import HeaderItem from './HeaderItem';
-import HeaderButtons from './HeaderButtons';
 
 const Header = () => {
   const { isSearch, changeIsOpen } = useFind();
@@ -24,7 +22,7 @@ const Header = () => {
 
         <HeaderItem to={'/'} path={path} text={'Главная'} />
         <HeaderItem to={'/nav'} path={path} text={'Навигаторе'} />
-        <HeaderItem to={'/library'} path={path} text={'Библиотека'} />
+        <HeaderItem to={'/library/playlist'} path={path} text={'Библиотека'} />
         <HeaderItem notALink={true} to={'/search'} path={path} text={'Поиск'} onClick={changeIsOpen} />
       </Box>
       <HeaderButtons id={id} onClick={handleOpenPopover} open={open} anchorEl={anchorEl} onClose={handleClosePopover} />

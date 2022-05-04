@@ -36,6 +36,25 @@ const style = {
     cursor: 'pointer',
     boxSizing: 'border-box',
     userSelect: 'none',
+    name: {
+      wr: {
+        position: 'absolute',
+        marginTop: '6px',
+        width: '180px',
+      },
+      fz: {
+        fontSize: '14px',
+      },
+    },
+    author: {
+      fontSize: '14px',
+      color: 'rgba(255, 255, 255, .7)',
+      width: '180px',
+      overflow: 'hidden',
+      height: '50px',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'pre',
+    },
     wr: {
       display: 'flex',
       width: '100%',

@@ -1,15 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Box } from '@mui/system';
 import { Container } from '@mui/material';
 
 import style from './style/style';
-import MainTitle from './MainTitle';
-import MainItem from './MainItem';
-
-import useSlider from './logic/useSlider';
-import ArrowIconRight from '../../assets/ArrowIconRight';
-import ArrowIconLeft from '../../assets/ArrowIconLeft';
+import MainSlider from './MainSlider';
 
 const data = [
   {
@@ -63,35 +58,15 @@ const data = [
 ];
 
 const MainHeader = () => {
-  const { position, maxPosition, slidePrev, slideNext } = useSlider(data);
   return (
     <Box sx={style.header}>
-      <img
+      <Box
+        component={'img'}
         style={style.header.image}
         src="https://lh3.googleusercontent.com/rTK0sPEskWiEZUEqFdzpa7k79PE5MS5VG07NmhkGLeJPQYiVok6y53CeiLu2IBWI3PeFD1Gmi0AI4rE=w1440-h806-l90-rj"
       />
       <Container>
-        <Box sx={style.header.wr}>
-          <MainTitle title={'Для спокойного утра'} />
-          <Box sx={style.item.wr}>
-            {position > 0 && (
-              <Box sx={style.slider.circleL} onClick={slidePrev}>
-                <ArrowIconLeft />
-              </Box>
-            )}
-            <Box
-              sx={{ transform: `translate3d(-${position}px, 0px, 0px)`, display: 'flex', transition: 'all .5s ease' }}>
-              {data.map((item, key) => (
-                <MainItem key={key} id={item.id} img={item.img} name={item.name} author={item.author} />
-              ))}
-            </Box>
-            {position !== maxPosition - 975 && (
-              <Box sx={style.slider.circleR} onClick={slideNext}>
-                <ArrowIconRight />
-              </Box>
-            )}
-          </Box>
-        </Box>
+        <MainSlider data={data} title={'Для спокойного утра'} />
       </Container>
     </Box>
   );

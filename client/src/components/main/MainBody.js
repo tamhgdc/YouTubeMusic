@@ -1,13 +1,6 @@
-import { Box } from '@mui/system';
+import MainSlider from './MainSlider';
+
 import { Container } from '@mui/material';
-
-import style from './style/style';
-import MainTitle from './MainTitle';
-import MainItem from './MainItem';
-
-import useSlider from './logic/useSlider';
-import ArrowIconRight from '../../assets/ArrowIconRight';
-import ArrowIconLeft from '../../assets/ArrowIconLeft';
 
 const data = [
   {
@@ -61,29 +54,10 @@ const data = [
 ];
 
 const MainBody = () => {
-  const { position, maxPosition, slidePrev, slideNext } = useSlider(data);
   return (
     <Container>
-      <Box sx={style.header.wr}>
-        <MainTitle title={'Noize MC'} />
-        <Box sx={style.item.wr}>
-          {position > 0 && (
-            <Box sx={style.slider.circleL} onClick={slidePrev}>
-              <ArrowIconLeft />
-            </Box>
-          )}
-          <Box sx={{ transform: `translate3d(-${position}px, 0px, 0px)`, display: 'flex', transition: 'all .5s ease' }}>
-            {data.map((item, key) => (
-              <MainItem key={key} id={item.id} img={item.img} name={item.name} author={item.author} />
-            ))}
-          </Box>
-          {position !== maxPosition - 975 && (
-            <Box sx={style.slider.circleR} onClick={slideNext}>
-              <ArrowIconRight />
-            </Box>
-          )}
-        </Box>
-      </Box>
+      <MainSlider data={data} title={'NOIZE MC'} />
+      <MainSlider data={data} title={'Lol'} />
     </Container>
   );
 };
