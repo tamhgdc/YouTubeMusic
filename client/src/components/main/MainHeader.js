@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Box } from '@mui/system';
 import { Container } from '@mui/material';
 
 import style from './style/style';
 import MainSlider from './MainSlider';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMainSlides } from '../../store/slices/sliderSlice';
 
 const data = [
   {
@@ -58,6 +60,12 @@ const data = [
 ];
 
 const MainHeader = () => {
+  const dispatch = useDispatch();
+  const { mainSlider } = useSelector((state) => state.sliders);
+  useEffect(() => {
+    dispatch(getMainSlides());
+  }, [dispatch]);
+  console.log(mainSlider);
   return (
     <Box sx={style.header}>
       <Box
@@ -66,7 +74,7 @@ const MainHeader = () => {
         src="https://lh3.googleusercontent.com/rTK0sPEskWiEZUEqFdzpa7k79PE5MS5VG07NmhkGLeJPQYiVok6y53CeiLu2IBWI3PeFD1Gmi0AI4rE=w1440-h806-l90-rj"
       />
       <Container>
-        <MainSlider data={data} title={'Для спокойного утра'} />
+        <MainSlider data={mainSlider} title={'Для спокойного утра'} />
       </Container>
     </Box>
   );

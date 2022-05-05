@@ -1,6 +1,8 @@
 const Router = require('express');
 const router = new Router();
 
-router.use('/main',)
+const mainRouter = require('./MainRouter')
+
+router.use('/main', mainRouter)
 
 module.exports = router;
