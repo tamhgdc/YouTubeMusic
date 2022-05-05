@@ -8,25 +8,24 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 
 import style from './style/style';
+import useLibrary from './logic/useLibrary';
 
 const data = [{ name: 'Сначала новые' }, { name: 'От А до Я' }, { name: 'От Я до А' }];
 
 const LibraryHeaderSort = () => {
-  const [showDropDown, setShowDropDown] = useState(false);
-  const [current, setCurrent] = useState(0);
+  const { visibleSort, currentSort, handlerVisibleSort, handlerSelectSort } = useLibrary();
   return (
     <Box sx={style.header.chip}>
-      <Chip sx={style.header.chip.item} onClick={() => setShowDropDown(true)} label={data[current].name} />
-      {showDropDown && (
-        <ClickAwayListener onClickAway={() => setShowDropDown(false)}>
+      <Chip sx={style.header.chip.item} onClick={handlerVisibleSort} label={data[currentSort].name} />
+      {visibleSort && (
+        <ClickAwayListener onClickAway={handlerVisibleSort}>
           <List sx={style.header.chip.item.list}>
             {data.map((item, key) => {
               return (
                 <ListItem key={key} disablePadding>
                   <ListItemButton
                     onClick={() => {
-                      setCurrent(key);
-                      setShowDropDown(false);
+                      handlerSelectSort(key);
                     }}>
                     <ListItemText primary={item.name} />
                   </ListItemButton>

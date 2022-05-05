@@ -1,6 +1,6 @@
-import { Box } from '@mui/system';
-import React from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import style from './style/style';
 
@@ -12,4 +12,10 @@ const LibraryHeaderItem = ({ to, text, path }) => {
   );
 };
 
-export default LibraryHeaderItem;
+export default memo(LibraryHeaderItem);
+
+LibraryHeaderItem.propTypes = {
+  to: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
+};

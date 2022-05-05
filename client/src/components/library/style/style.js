@@ -20,6 +20,7 @@ const style = {
           background: 'rgb(33, 33, 33)',
           width: '150px',
           color: '#fff',
+          zIndex: 99,
           span: {
             fontSize: '14px',
           },
