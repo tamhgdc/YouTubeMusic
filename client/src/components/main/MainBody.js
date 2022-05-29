@@ -1,6 +1,8 @@
 import MainSlider from './MainSlider';
 
 import { Container } from '@mui/material';
+import { useSelector } from 'react-redux';
+import ItemLoader from '../loaders/ItemLoader';
 
 const data = [
   {
@@ -54,10 +56,14 @@ const data = [
 ];
 
 const MainBody = () => {
+  const { sliders, slidersIsLoading } = useSelector((state) => state.sliders);
   return (
     <Container>
-      <MainSlider data={data} title={'NOIZE MC'} />
-      <MainSlider data={data} title={'Lol'} />
+      {slidersIsLoading ? (
+        <ItemLoader />
+      ) : (
+        sliders.map((item, key) => <MainSlider key={key} data={item.slides} title={item.name} />)
+      )}
     </Container>
   );
 };

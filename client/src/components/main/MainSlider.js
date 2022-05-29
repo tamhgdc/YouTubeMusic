@@ -25,7 +25,7 @@ const MainSlider = ({ data, title }) => {
         )}
         <Box sx={{ transform: `translate3d(-${position}px, 0px, 0px)`, display: 'flex', transition: 'all .5s ease' }}>
           {data.map((item, key) => (
-            <MainItem key={key} id={item._id} img={item.img} name={item.name} author={item.author} />
+            <MainItem key={key} id={item.id} img={item.img} name={item.name} author={item.author} />
           ))}
         </Box>
         {position !== maxPosition - 975 && (

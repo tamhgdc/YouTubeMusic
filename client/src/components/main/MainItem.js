@@ -33,7 +33,7 @@ const MainItem = ({ id, img, name, author, isNotALink = false, onClick }) => {
 export default memo(MainItem);
 
 MainItem.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   img: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
